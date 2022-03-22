@@ -4,9 +4,9 @@
       <label for="" class="form-label">Sort by category</label>
       <select class="form-select" name="" id="sortCategory" onchange="sortCategory()">
         <option value="All">All</option>
-        <option value="WesternCape">Western Cape</option>
-        <option value="Gauteng">Gauteng</option>
-        <option value="EasternCape">Eastern Cape</option>
+        <option value="WesternCape">Wes In</option>
+        <option value="Gauteng">Cape Sun</option>
+        <option value="EasternCape">Southern Sun</option>
       </select>
     </div> 
 
@@ -24,7 +24,7 @@
         <option value="descending">Descending</option>
       </select>
     </div>  
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add a product</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add a booking</button>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Update user <i class="bi bi-person-circle"></i></button>
     <router-link class="btn btn-primary" to="/Cart">Cart</router-link>
    </div>
@@ -46,10 +46,10 @@
               </div>
               <div class="mb-3">
                 <label for="" class="form-label">Category</label>
-                <select class="form-select" name="addCategory" id="addCategory" v-model="category">
-                  <option value="WesternCape">Western Cape</option>
-                  <option value="Gauteng">Gauteng</option>
-                  <option value="EasternCape">Eastern Cape</option>
+                <select class="form-select" name="addCategory" id="addCategory" v-model="hotel_name">
+                  <option value="WesternCape">Wes In</option>
+                  <option value="Gauteng">Cape Sun</option>
+                  <option value="EasternCape">Southern Sun</option>
                 </select>
               </div>
               <div class="mb-3">
@@ -126,10 +126,10 @@
               </div>
               <div class="mb-3">
                 <label for="" class="form-label">Category</label>
-                <select class="form-select" name="addCategory" id="addCategory" v-model="category">
-                  <option value="WesternCape">Western Cape</option>
-                  <option value="Gauteng">Gauteng</option>
-                  <option value="EasternCape">Eastern Cape</option>
+                <select class="form-select" name="addCategory" id="addCategory" v-model="hotel_name">
+                  <option value="WesternCape">Wes In</option>
+                  <option value="Gauteng">Cape Sun</option>
+                  <option value="EasternCape">Southern Sun</option>
                 </select>
               </div>
               <div class="mb-3">
@@ -158,16 +158,16 @@
   </div>
   <div class="container my-5">
     <!-- <input type="text" v-model="search" /> -->
-    <div v-if="products.length" class="row">
-      <div v-for="product of filterProducts" :key="product._id" class="col-lg-4 col-md-6 col-sm-12">
+    <div v-if="bookings.length" class="row">
+      <div v-for="booking of filterBookings" :key="booking._id" class="col-lg-4 col-md-6 col-sm-12">
         <div class="card">
-          <img :src="product.img" class="card-img-top" :alt="product.title"/>
+          <img :src="booking.img" class="card-img-top" :alt="product.title"/>
           <div class="card-body">
-            <h5 class="card-title">{{ product.title }}</h5>
-            <p class="card-text">R{{ product.price }}</p>
-            <p class="card-text">{{ product.category }}</p>
-            <p class="card-text">{{ product.description }}</p>
-            <p class="card-text">{{ product._id }}</p>
+            <h5 class="card-title">{{ booking.title }}</h5>
+            <p class="card-text">R{{ booking.price }}</p>
+            <p class="card-text">{{ booking.hotel_name }}</p>
+            <p class="card-text">{{ booking.description }}</p>
+            <p class="card-text">{{ booking._id }}</p>
             <div class="d-flex mb-3">
               <input type="number" class="form-control" value="1" min="1" id="addToCart${position}"/>
               <button type="button" class="btn2" @click="addToCart()">
@@ -183,7 +183,7 @@
       </div>
     </div>
     <div v-else>
-      <p>Loading products...</p>
+      <p>Loading bookings...</p>
     </div>
   </div>
 </template>
@@ -215,9 +215,11 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.bookings = json;
+          console.log(bookings);
         })
         .catch((err) => {
           alert("User not logged in");
+           console.log(bookings);
         });
     } else {
       alert("User not logged in");
@@ -268,7 +270,7 @@ export default {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("https://bookingsystemapp.herokuapp.com/bookings" , {
+      fetch("https://bookingsystemapp.herokuapp.com/bookings" + this._id, {
         method: "PUT",
         body: JSON.stringify({
           hotel_name: this.hotel_name,
