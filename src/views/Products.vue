@@ -150,7 +150,7 @@
               Close
             </button>
             <br />
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="updateProduct()">Edit Product</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="updateBooking()">Edit Product</button>
           </div>
         </div>
       </div>
@@ -193,13 +193,12 @@ export default {
   data() {
     return {
       bookings: [],
-      fullname: "",
-      email: "",
-      password: "",
-      title: "",
-      category: "",
+      hotel_name: "",
+      check_in: "",
+      check_out: "",
       description: "",
       img: "",
+      description: "",
       price: "",
       search: "",
     };
@@ -226,9 +225,9 @@ export default {
     }
   },
   computed: {
-    filterProducts: function () {
+    filterBookings: function () {
       return this.bookings.filter((booking) => {
-        return booking.category.match(this.search);
+        return booking.hotel_name.match(this.search);
       });
     },
   },
@@ -242,11 +241,12 @@ export default {
       fetch("https://bookingsystemapp.herokuapp.com/bookings", {
         method: "POST",
         body: JSON.stringify({
-          title: this.title,
+          hotel_name: this.hotel_name,
+          check_in: this.check_in,
+          check_out: this.check_out,
           description: this.description,
-          category: this.category,
-          price: this.price,
           img: this.img,
+          price: this.price,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -263,16 +263,17 @@ export default {
         });
     },
     // Update Product
-    updateProduct() {
+    updateBooking() {
       if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("https://bookingsystemapp.herokuapp.com/bookings" + this._id, {
+      fetch("https://bookingsystemapp.herokuapp.com/bookings" , {
         method: "PUT",
         body: JSON.stringify({
-          title: this.title,
-          category: this.category,
+          hotel_name: this.hotel_name,
+          check_in: this.check_in,
+          check_out: this.check_out,
           description: this.description,
           img: this.img,
           price: this.price,
