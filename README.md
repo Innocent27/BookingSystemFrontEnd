@@ -1,4 +1,4 @@
-# point-of-sale-frontend
+# hotel booking system
 
 ## Project setup
 
