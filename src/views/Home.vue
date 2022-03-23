@@ -8,6 +8,7 @@
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
                 <a class="btn btn-primary btn-xl text-uppercase" href="#services">Please book to get special deals &#128514;</a>
             </div>
+            
 </header>
 <!-- </body> -->
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="container d-flex justify-content-end mb-3 mt-5 pt-4">
      <div class="d-flex w-25 ms-3">
-      <label for="" class="form-label">Sort by category</label>
+      <label for="" class="form-label">Choose a hotel</label>
       <select class="form-select" name="" id="sortCategory" onchange="sortCategory()">
         <option value="All">All</option>
         <option value="WesternCape">Wes In</option>
@@ -11,7 +11,7 @@
     </div> 
 
     <div class="d-flex w-25 ms-3">
-      <label for="" class="form-label">Sort by name</label>
+      <label for="" class="form-label">Sort by names</label>
       <select class="form-select" name="" id="sortName" onchange="sortName()">
         <option value="ascending">Ascending</option>
         <option value="descending">Descending</option>
@@ -24,9 +24,9 @@
         <option value="descending">Descending</option>
       </select>
     </div>  
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add a booking</button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Update user <i class="bi bi-person-circle"></i></button>
-    <router-link class="btn btn-primary" to="/Cart">Cart</router-link>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Book Now</button>
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Update user <i class="bi bi-person-circle"></i></button> -->
+    <!-- <router-link class="btn btn-primary" to="/Cart">Cart</router-link> -->
    </div>
   <!-- <br />
   <hr />  -->
@@ -41,28 +41,36 @@
           <div class="modal-content">
             <div class="modal-body">
               <div class="mb-3">
-                <label for="addTitle" class="form-label">Title</label>
-                <input class="form-control" type="text" name="addTitle" id="addTitle" v-model="title" />
+                <label for="addTitle" class="form-label">Comments</label>
+                <input class="form-control" type="text" name="addname" id="addTitle" v-model="title" />
               </div>
               <div class="mb-3">
-                <label for="" class="form-label">Category</label>
-                <select class="form-select" name="addCategory" id="addCategory" v-model="hotel_name">
+                <label for="" class="form-label">Choose hotels</label>
+                <select class="form-select" name="addCategoryname" id="addCategory" v-model="hotel_name">
                   <option value="WesternCape">Wes In</option>
                   <option value="Gauteng">Cape Sun</option>
                   <option value="EasternCape">Southern Sun</option>
                 </select>
               </div>
               <div class="mb-3">
-                <label for="addPrice" class="form-label">Price</label>
-                <input class="form-control" type="text" name="addPrice" id="addPrice" v-model="price"/>
+                <label for="addTitle" class="form-label">checkin</label>
+                <input class="form-control" type="datetime-local" name="addname" id="addTitle" v-model="check_in" />
               </div>
               <div class="mb-3">
+                <label for="addTitle" class="form-label">checkOut</label>
+                <input class="form-control" type="datetime-local" name="addname" id="addTitle" v-model="check_out" />
+              </div>
+              <div class="mb-3">
+                <label for="addDescription" class="form-label">Kinds of services would you prefer</label> 
+                <input class="form-control" type="text" name="addDescriptionName" id="addDescription" v-model="description"/>
+              </div>
+              <!-- <div class="mb-3">
                 <label for="addImg" class="form-label">Image URL</label>
-                <input class="form-control" type="text" name="addImg" id="addImg" v-model="img"/>
-              </div>
+                <input class="form-control" type="text" name="addImgName" id="addImg" v-model="img"/>
+              </div> -->
               <div class="mb-3">
-                <label for="addDescription" class="form-label">Description</label> 
-                <input class="form-control" type="text" name="addDescription" id="addDescription" v-model="description"/>
+                <label for="addPrice" class="form-label">Price</label>
+                <input class="form-control" type="text" name="addPriceName" id="addPrice" v-model="price"/>
               </div>
             </div>
 
@@ -77,7 +85,7 @@
 
   <!-- modal to update the user -->
 
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -86,11 +94,11 @@
             <div class="modal-body">
               <div class="mb-3">
                 <label for="addFullname" class="form-label">Fullname</label>
-                <input class="form-control" type="text" name="addFullname" id="addFullname" v-model="fullname"/>
+                <input class="form-control" type="text" name="addFullnameName" id="addFullname" v-model="fullname"/>
               </div>
               <div class="mb-3">
                 <label for="addEmail" class="form-label">Email</label>
-                <input class="form-control" type="email" name="addEmail" id="addEmail" v-model="email"/>
+                <input class="form-control" type="email" name="addEmailName" id="addEmail" v-model="email"/>
               </div>
               <div class="mb-3">
                 <label for="addPhone_number" class="form-label">Phone_number</label>
@@ -98,7 +106,7 @@
               </div>
               <div class="mb-3">
                 <label for="addPassword" class="form-label">Password</label>
-                <input class="form-control" type="password" name="addPassword" id="addPassword" v-model="password"/>
+                <input class="form-control" type="password" name="addPasswordName" id="addPassword" v-model="password"/>
               </div>
             </div>
 
@@ -109,7 +117,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- modal to update products -->
 
@@ -122,11 +130,11 @@
             <div class="modal-body">
               <div class="mb-3">
                 <label for="addTitle" class="form-label">Title</label>
-                <input class="form-control" type="text" name="addTitle" id="addTitle" v-model="title"/>
+                <input class="form-control" type="text" name="addTitle" id="addTitle1" v-model="title"/>
               </div>
               <div class="mb-3">
                 <label for="" class="form-label">Category</label>
-                <select class="form-select" name="addCategory" id="addCategory" v-model="hotel_name">
+                <select class="form-select" name="addCategory" id="addCategory1" v-model="hotel_name">
                   <option value="WesternCape">Wes In</option>
                   <option value="Gauteng">Cape Sun</option>
                   <option value="EasternCape">Southern Sun</option>
@@ -134,15 +142,16 @@
               </div>
               <div class="mb-3">
                 <label for="addPrice" class="form-label">Price</label>
-                <input class="form-control" type="text" name="addPrice" id="addPrice" v-model="price" />
+                <input class="form-control" type="text" name="addPrice" id="addPrice1" v-model="price" />
               </div>
               <div class="mb-3">
                 <label for="addImg" class="form-label">Image URL</label>
-                <input class="form-control" type="text" name="addImg" id="addImg" v-model="img"/>
+                <input class="form-control" type="text" name="addImg
+                " id="addImg1" v-model="img"/>
               </div>
               <div class="mb-3">
                 <label for="addDescription" class="form-label" >Description</label>
-                <input class="form-control" type="text" name="addDescription" id="addDescription" v-model="description"/>
+                <input class="form-control" type="text" name="addDescription" id="addDescription1" v-model="description"/>
               </div>
             </div>
 
@@ -161,7 +170,7 @@
     <div v-if="bookings.length" class="row">
       <div v-for="booking of filterBookings" :key="booking._id" class="col-lg-4 col-md-6 col-sm-12">
         <div class="card">
-          <img :src="booking.img" class="card-img-top" :alt="product.title"/>
+          <img :src="booking.img" class="card-img-top" :alt="booking.title"/>
           <div class="card-body">
             <h5 class="card-title">{{ booking.title }}</h5>
             <p class="card-text">R{{ booking.price }}</p>
@@ -205,7 +214,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("jwt")) {
-      fetch("https://bookingsystemapp.herokuapp.com/bookings/", {
+      fetch("http://bookingsystemapp.herokuapp.com/bookings/", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -215,14 +224,14 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.bookings = json;
-          console.log(bookings);
+          console.log(json);
         })
         .catch((err) => {
-          alert("User not logged in");
-           console.log(bookings);
+          alert("Must be logged in");
+          //  console.log(bookings);
         });
     } else {
-      alert("User not logged in");
+      alert("User not logged in yyyy");
       this.$router.push({ name: "Login" });
     }
   },
@@ -258,7 +267,7 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           alert("Booking Created");
-          this.$router.push({ name: "Products" });
+          this.$router.push({ name: "products" });
         })
         .catch((err) => {
           alert(err);
@@ -300,7 +309,7 @@ export default {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("https://bookingsystemapp.herokuapp.com/users" + this.id, {
+      fetch("http://bookingsystemapp.herokuapp.com/users" + this.id, {
         method: "PUT",
         body: JSON.stringify({
           fullname: this.fullname,

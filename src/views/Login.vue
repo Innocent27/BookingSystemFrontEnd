@@ -62,7 +62,7 @@ export default {
            this.$router.push({ name: "products" });
         })
         .catch((err) => {
-			console.log(err);
+			// console.log(err);
           alert("User does not exist");
         });
     },
