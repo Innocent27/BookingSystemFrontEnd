@@ -214,7 +214,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("jwt")) {
-      fetch("http://bookingsystemapp.herokuapp.com/bookings/", {
+      fetch("https://bookingsystemapp.herokuapp.com/bookings/", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
