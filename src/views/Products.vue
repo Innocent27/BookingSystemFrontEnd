@@ -192,10 +192,17 @@
       </div>
     </div>
     <div v-else>
-      <p>Loading bookings...</p>
+      <div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
     </div>
   </div>
 </template>
+<style scoped>
+body{
+  background-color: aliceblue;
+}
+</style>
 
 <script>
 export default {
@@ -214,7 +221,7 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("jwt")) {
-      fetch("https://bookingsystemapp.herokuapp.com/bookings/", {
+      fetch("http://localhost:2000/bookings", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -231,8 +238,8 @@ export default {
           //  console.log(bookings);
         });
     } else {
-      alert("User not logged in yyyy");
-      this.$router.push({ name: "Login" });
+      alert("User not logged in");
+      this.$router.push({ name: "login" });
     }
   },
   computed: {
@@ -249,7 +256,7 @@ export default {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("https://bookingsystemapp.herokuapp.com/bookings", {
+      fetch("http://localhost:2000/bookings", {
         method: "POST",
         body: JSON.stringify({
           hotel_name: this.hotel_name,
@@ -279,7 +286,7 @@ export default {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("https://bookingsystemapp.herokuapp.com/bookings" + this._id, {
+      fetch("http://localhost:2000/bookings" + this._id, {
         method: "PUT",
         body: JSON.stringify({
           hotel_name: this.hotel_name,
@@ -309,7 +316,7 @@ export default {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("http://bookingsystemapp.herokuapp.com/users" + this.id, {
+      fetch("http://localhost:2000/users" + this.id, {
         method: "PUT",
         body: JSON.stringify({
           fullname: this.fullname,
@@ -336,7 +343,7 @@ export default {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("https://bookingsystemapp.herokuapp.com/bookings/" + this._id, {
+      fetch("http://localhost:2000/bookings/" + this._id, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

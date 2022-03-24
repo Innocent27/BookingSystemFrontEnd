@@ -43,7 +43,7 @@ export default {
   methods: {
     login() {
 		console.log(this.email, this.password);
-      fetch("https://bookingsystemapp.herokuapp.com/users/login", {
+      fetch("http://localhost:5000/users/login", {
         method: "POST",
 		// mode: 'no-cors',
         body: JSON.stringify({
